@@ -68,6 +68,7 @@ h1{font-size:clamp(27px,4vw,42px);line-height:1.25;margin:9px 0;color:#6E5040;le
 .legend span{font-size:13px;padding:5px 8px;border-radius:999px;background:#fff;border:1px solid var(--line)}
 .footer{text-align:center;font-size:13px;color:#A18C7A;margin-top:22px}
 @media(max-width:760px){.layout{grid-template-columns:1fr}.hero{padding:26px 20px}.hero:after{font-size:60px;right:12px}.panel{padding:16px}.stop{grid-template-columns:57px 1fr}.map-point{font-size:10px}.map-star{font-size:24px}}
+.stop-maplinks{display:inline-block;margin-top:5px;font-size:.92em}.stop-maplinks a{display:inline-block;margin-right:4px;white-space:normal}.stop-maplinks a:focus{outline:2px solid var(--caramel);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -219,7 +220,18 @@ const days = {
 };
 function render(day){
  const d=days[day]; document.documentElement.style.setProperty('--day',d.color); document.documentElement.style.setProperty('--daybg',d.bg);
- const stopHtml=d.stops.map(s=>`<div class="stop"><div class="time">${s[0]}</div><div class="stopbody"><h3>${s[1]}</h3><p>${s[2]}</p><span class="tag ${s[3].includes('固定')||s[3].includes('必去')?'fixed':s[3].includes('外帶')?'takeout':s[3].includes('可選')||s[3].includes('彈性')||s[3].includes('有時間')?'optional':''}">${s[3]}</span></div></div>`).join('');
+ const makeMapLinks=(title,desc)=>{
+  const plain=String(desc).replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+  const korean=(plain.match(/[가-힣][가-힣0-9·＆&()\- ]{1,45}/)||[])[0]||'';
+  const query=(korean+' '+title+' Busan').trim();
+  const naver='https://map.naver.com/p/search/'+encodeURIComponent(query);
+  const google='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(query);
+  const hasNaver=String(desc).includes('map.naver.com');
+  const hasGoogle=String(desc).includes('google.com/maps');
+  if(hasNaver&&hasGoogle) return '';
+  return `<span class="stop-maplinks">${hasNaver?'':`<a href="${naver}" target="_blank" rel="noopener">Naver Map 搜尋 ↗</a>`}${hasNaver||hasGoogle?' ｜ ':''}${hasGoogle?'':`<a href="${google}" target="_blank" rel="noopener">Google Maps 搜尋 ↗</a>`}</span>`;
+ };
+ const stopHtml=d.stops.map(s=>{const extra=makeMapLinks(s[1],s[2]);return `<div class="stop"><div class="time">${s[0]}</div><div class="stopbody"><h3>${s[1]}</h3><p>${s[2]}${extra?' '+extra:''}</p><span class="tag ${s[3].includes('固定')||s[3].includes('必去')?'fixed':s[3].includes('外帶')?'takeout':s[3].includes('可選')||s[3].includes('彈性')||s[3].includes('有時間')?'optional':''}">${s[3]}</span></div></div>`}).join('');
  const routeHtml=d.route.map((r,i)=>`<div class="map-point"><span class="map-star">★</span><span>${r}</span></div>${i<d.route.length-1?'<span class="arrow">›</span>':''}`).join('');
  const links=d.maplinks.map(l=>`<a class="maplink" href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join('');
  document.getElementById('content').innerHTML=`
