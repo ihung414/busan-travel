@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>釜山 6 天 5 夜｜奶茶色旅行手帳預覽</title>
+<style>
+:root{
+ --cream:#FBF7F0; --paper:#FFFDF9; --latte:#E9D9C8; --caramel:#9A765D;
+ --coffee:#594638; --ink:#51453C; --muted:#8B7C70; --pink:#E8C7C5;
+ --rose:#B97879; --sage:#C8D5C1; --line:#E9DED2; --butter:#F0E1A8;
+ --shadow:0 12px 28px rgba(92,67,47,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Microsoft JhengHei","Microsoft JhengHei UI","微軟正黑體",sans-serif;font-size:16px;line-height:1.75}
+a{color:#8C6650;text-decoration:none;border-bottom:1px dotted #C6A995}
+.wrap{max-width:1050px;margin:auto;padding:24px 18px 60px}
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:34px 30px 26px;background:linear-gradient(135deg,#F3E6D8 0%,#FBF3E9 58%,#F0E3DF 100%);box-shadow:var(--shadow);border:1px solid #EADCCD}
+.hero:after{content:"✦";position:absolute;right:28px;top:8px;font-size:86px;color:#D9BCA6;opacity:.55}
+.kicker{font-size:14px;letter-spacing:2px;color:#98745C;font-weight:700}
+h1{font-size:clamp(27px,4vw,42px);line-height:1.25;margin:9px 0;color:#6E5040;letter-spacing:.03em}
+.hero p{max-width:700px;margin:8px 0 0;color:#786657;font-size:16px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pill{font-size:14px;border-radius:999px;padding:6px 11px;background:#FFFAF4;border:1px solid #E7D6C6;color:#7E6250}
+.notice{margin:18px 0;padding:13px 16px;background:#FFF9E8;border:1px solid #EADBAE;border-radius:15px;color:#786440;font-size:15px}
+.day-tabs{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 16px}
+.day-tab{border:1px solid #E4D7CA;background:#FFFDF9;color:#806955;border-radius:14px;padding:10px 13px;font:inherit;font-size:15px;cursor:pointer;transition:.15s}
+.day-tab.active{background:#80634F;color:#fff;border-color:#80634F;box-shadow:0 5px 12px #b9a18c55}
+.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:16px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow)}
+.day-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.day-badge{flex:none;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:28px;background:var(--daybg);color:var(--day)}
+.day-head h2{margin:0;color:#6B4E3D;font-size:26px;line-height:1.35}
+.day-head .date{font-size:14px;color:var(--muted);letter-spacing:.08em}
+.day-head p{margin:5px 0 0;color:#827365;font-size:15px}
+.route{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:12px 13px;background:#FBF6EF;border-radius:14px;margin:12px 0 18px;font-size:14px;color:#766454}
+.route .star{color:var(--day);font-size:21px;line-height:1}
+.route .arrow{color:#BDA998}
+.timeline{display:flex;flex-direction:column;gap:13px}
+.stop{display:grid;grid-template-columns:67px 1fr;gap:12px}
+.time{font-size:14px;font-weight:700;color:#9B7B63;padding-top:3px}
+.stopbody{border-left:2px solid var(--day);padding:0 0 3px 14px}
+.stop h3{font-size:18px;margin:0 0 4px;color:#594639}
+.stop p{font-size:15px;margin:3px 0;color:#786B60}
+.tag{display:inline-block;font-size:13px;border-radius:999px;padding:3px 8px;margin:2px 4px 2px 0;background:#F4E9DF;color:#8A6A53}
+.tag.takeout{background:#E9F0E5;color:#597153}
+.tag.fixed{background:#F8E5E4;color:#9D5D61}
+.tag.optional{background:#F7F0D8;color:#8C7443}
+.map-title{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.map-title h3{margin:0;font-size:18px;color:#6B4E3D}
+.map-title small{font-size:13px;color:#A28C7B}
+.map-canvas{margin:14px 0 10px;background:linear-gradient(145deg,#F9F1E6,#FDFBF5);border:1px solid #EFE2D3;border-radius:16px;padding:18px 13px;position:relative}
+.map-route{display:flex;align-items:center;justify-content:space-between;gap:3px;position:relative}
+.map-route:before{content:"";height:2px;position:absolute;left:7%;right:7%;top:17px;background:var(--day);opacity:.45}
+.map-point{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;max-width:95px;text-align:center;font-size:13px;color:#776557}
+.map-star{font-size:28px;color:var(--day);line-height:1;text-shadow:0 2px 0 #fff}
+.map-note{font-size:13px;color:#9B8979;margin:8px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.maplink{font-size:14px;background:#FFF8F1;border:1px solid #E7D8C8;border-radius:10px;padding:7px 9px}
+.side-section{margin-top:16px}
+.side-section h3{font-size:18px;color:#6B4E3D;margin:0 0 8px}
+.mini{padding:10px 12px;border-radius:13px;background:#FBF5EE;margin-top:8px;font-size:14px;line-height:1.75}
+.mini strong{color:#6B4E3D}
+.mini .ko{display:block;color:#9A8675;font-size:13px;margin-top:2px}
+.mini .itemlinks{margin-top:5px}
+.smallprint{font-size:13px;color:#9A8A7B;margin-top:16px}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.legend span{font-size:13px;padding:5px 8px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+.footer{text-align:center;font-size:13px;color:#A18C7A;margin-top:22px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.hero{padding:26px 20px}.hero:after{font-size:60px;right:12px}.panel{padding:16px}.stop{grid-template-columns:57px 1fr}.map-point{font-size:10px}.map-star{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">BUSAN TRAVEL JOURNAL · 2026</div>
+    <h1>釜山 6 天 5 夜<br>親子選品旅行手帳</h1>
+    <p>2026.10.21（三）— 10.26（一）　｜　住宿：H Avenue 廣安里海邊</p>
+    <div class="pills">
+      <span class="pill">☕ 咖啡順路外帶</span><span class="pill">★ 每日不同顏色星號</span>
+      <span class="pill">🧸 親子節奏</span><span class="pill">🗺 Naver Map＋Google Maps</span>
+    </div>
+  </header>
+  <div class="notice">✿ 預覽版設計原則：順路咖啡、麵包與小店直接放在每天的行程時間段中；不是另外一份必去清單。地址尚未核實的店家會清楚標示，避免誤導航。</div>
+  <nav class="day-tabs" id="tabs">
+    <button class="day-tab active" data-day="1">⭐ Day 1 · 黃</button>
+    <button class="day-tab" data-day="2">⭐ Day 2 · 藍</button>
+    <button class="day-tab" data-day="3">⭐ Day 3 · 紫</button>
+    <button class="day-tab" data-day="4">⭐ Day 4 · 綠</button>
+    <button class="day-tab" data-day="5">⭐ Day 5 · 橘</button>
+    <button class="day-tab" data-day="6">⭐ Day 6 · 粉</button>
+  </nav>
+  <main id="content">
+  <div class="layout" style="--day:#C49A2E;--daybg:#F6EDCD">
+   <section class="panel">
+    <div class="day-head"><div class="day-badge">★</div><div><div class="date">10/21（三） · DAY 1</div><h2>抵達釜山・廣安里入住</h2><p>第一天留白一點，先把交通與入住處理好。</p></div></div>
+    <div class="route"><strong>今日路線</strong>　金海機場 → Pass／換匯 → H Avenue → 廣安里晚餐</div>
+    <div class="timeline">
+     <div class="stop"><div class="time">抵達後</div><div class="stopbody"><h3>金海機場｜領取 Visit Busan Pass、少量換匯、確認 T-money</h3><p>Pass 與交通卡用途不同；機場領卡服務時間要配合航班。</p><span class="tag fixed">固定事項</span></div></div>
+     <div class="stop"><div class="time">入住</div><div class="stopbody"><h3>H Avenue 廣安里海邊店</h3><p>에이치애비뉴 광안리해변점｜부산 수영구 광안해변로278번길 42, 오션브릿지 B동 9층</p><span class="tag">住宿</span></div></div>
+     <div class="stop"><div class="time">晚餐後／路過才拍</div><div class="stopbody"><h3>廣安里拍貼｜Photoism Box（포토이즘 박스 광안리점）</h3><p>晚餐後散步、看海時順路拍四格；若路線沒經過或太累就跳過。<a href="https://map.naver.com/p/search/포토이즘%20박스%20광안리점" target="_blank">Naver Map ↗</a> ｜ <a href="https://www.google.com/maps/search/?api=1&query=Photoism+Box+Gwangalli+Busan" target="_blank">Google Maps ↗</a></p><span class="tag optional">（路過才拍）</span></div></div>
+     <div class="stop"><div class="time">晚餐</div><div class="stopbody"><h3>飯店附近晚餐＋廣安里散步</h3><p>Cao Cao 刀削麵或 Gong’s Dumplings 擇一；店家分店先用地圖確認。</p><span class="tag">不跨區</span></div></div>
+     <div class="stop"><div class="time">路過才買</div><div class="stopbody"><h3>Tenpercent Coffee／Franklin Coffee</h3><p>只在飯店周邊或當天原本路線會經過的分店外帶，不為咖啡特別繞路。</p><span class="tag takeout">（路過才買）</span></div></div>
+    </div>
+    <div class="side-section"><h3>✎ 今日小提醒</h3><div class="mini">Momo Café 與 Depulit 是不同店家；出發前核對店址。廣安里 Photoism Box 已放入飯店散步區塊，路過才拍。</div></div>
+   </section>
+   <aside><section class="panel"><div class="map-title"><h3>今日星號地圖</h3><small>示意路線・非比例地圖</small></div><div class="map-canvas"><div class="map-route"><div class="map-point"><span class="map-star">★</span><span>金海機場</span></div><span class="arrow">›</span><div class="map-point"><span class="map-star">★</span><span>Pass／換匯</span></div><span class="arrow">›</span><div class="map-point"><span class="map-star">★</span><span>H Avenue</span></div><span class="arrow">›</span><div class="map-point"><span class="map-star">★</span><span>廣安里晚餐</span></div></div><p class="map-note">★ 本日星號使用專屬顏色；實際交通請點開地圖導航。</p></div><div class="links"><a class="maplink" href="https://map.naver.com/p/search/H%20Avenue%20%EA%B4%91%EC%95%88%EB%A6%AC" target="_blank">飯店 Naver Map ↗</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=H+Avenue+Gwanganri+Beach+Busan" target="_blank">飯店 Google Maps ↗</a></div></section><section class="panel side-section"><h3>☕ 今天順路的選擇</h3><div class="mini"><strong>原則</strong><br>本來就會經過才去；不順路、時間不合或孩子累了，就直接略過。</div></section></aside>
+  </div>
+  <noscript><div class="notice">若瀏覽器未執行互動功能，請往下查看六天的行程摘要。</div>
+   <section class="panel"><h2>Day 2｜10/22 海雲台・天空膠囊・青沙浦</h2><p>自然島鹽麵包、Miffy／MUMU（擇一）→ 海雲台拍貼 PHOTO SIGNATURE（路過才拍）→ 16:15 尾浦站報到 → 17:00 天空膠囊 → 青沙浦甜點／咖啡選一。</p><h2>Day 3｜10/23 機張・Luge・Outlet・海景</h2><p>Skyline Luge → 蔘雞湯 → 樂天東釜山 Outlet → CORALANI → Gogyeol 晚餐。雨天 KidZania 僅替代戶外活動。</p><h2>Day 4｜10/24 廣安里・Centum City・無人機秀</h2><p>廣安里海灘 → 午餐 → 新世界 Centum City → 順路小店 → 18:30 遊艇集合／19:00 無人機秀。Working Holiday（有空才去）；Tenpercent／Franklin Coffee（路過才買）；Haru Film（有空才拍）。</p><h2>Day 5｜10/25 Arte Museum・影島・松島・南浦洞</h2><p>Arte Museum 必去 → MOMOS Coffee 影島店（路過才買）→ 白淺灘可選 → 松島纜車 → BIFF 廣場糖餅／南浦洞購物 → Photoism Box（路過才拍）→ 韓牛晚餐。</p><h2>Day 6｜10/26 回程日</h2><p>依航班決定；晚班機才考慮西面／田浦、拍貼店、咖啡外帶（路過才買），早班機直接前往機場。</p>
+  </noscript>
+ </main>
+  <div class="legend">
+    <span>🌷 主要行程</span><span>🌿 順路外帶</span><span>🍮 有空再去</span><span>🎟 固定預約</span><span>⚠ 地址／營業時間待核實</span>
+  </div>
+  <div class="footer">設計預覽 · 奶茶／奶油米白／焦糖棕 · 正式 PDF／Word 將沿用此視覺方向</div>
+</div>
+<script>
+const days = {
+1:{
+ color:"#C49A2E",bg:"#F6EDCD",date:"10/21（三）",title:"抵達釜山・廣安里入住",
+ subtitle:"第一天留白一點，先把交通與入住處理好。",
+ route:["金海機場","Pass／換匯","H Avenue","廣安里晚餐"],
+ stops:[
+  ["抵達後","金海機場｜領取 Visit Busan Pass、少量換匯、確認 T-money","Pass 與交通卡用途不同；機場領卡服務時間要配合航班。","固定事項"],
+  ["入住","H Avenue 廣安里海邊店","에이치애비뉴 광안리해변점｜부산 수영구 광안해변로278번길 42, 오션브릿지 B동 9층","住宿"],
+  ["晚餐後／路過才拍","廣安里拍貼｜Photoism Box（포토이즘 박스 광안리점）","부산 수영구 광남로94번길 16。晚餐後散步、看海時順路拍四格；若路線沒經過或太累就跳過。<a href='https://map.naver.com/p/search/포토이즘%20박스%20광안리점' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Photoism+Box+Gwangalli+Busan' target='_blank'>Google Maps ↗</a>","(路過才拍)"],
+  ["晚餐","飯店附近晚餐＋廣安里散步","Cao Cao 刀削麵或 Gong’s Dumplings 擇一；店家分店先用地圖確認。若不累，再看廣安大橋夜景。","不跨區"],
+  ["有空才去","早餐／咖啡順手補給","La feuille（라푀이，分店待核實）或 All Sunday Bagel（올선데이 베이글）；Tenpercent Coffee 只在路過分店時外帶。","(有空才去)／順路外帶"],
+  ["有空才去","Momo Café／Depulit","兩間為不同店家；先核對店址與營業時間，不為了打卡特別繞路。","(有空才去)"]
+ ],
+ maplinks:[["飯店 Naver Map","https://map.naver.com/p/search/H%20Avenue%20%EA%B4%91%EC%95%88%EB%A6%AC"],["飯店 Google Maps","https://www.google.com/maps/search/?api=1&query=H+Avenue+Gwanganri+Beach+Busan"]],
+ note:"Momo Café 與 Depulit 是不同店家；出發前核對店址。廣安里 Photoism Box 已放入飯店散步區塊，路過才拍。"
+},
+2:{
+ color:"#4B8FCB",bg:"#E5F0F8",date:"10/22（四）",title:"海雲台・天空膠囊・青沙浦",
+ subtitle:"17:00 天空膠囊是固定錨點；所有小店都要讓位給預約。",
+ route:["早午餐備案：Working Holiday（有空才去）","自然島鹽麵包","Miffy／MUMU","尾浦站","天空膠囊","青沙浦"],
+ stops:[
+  ["早午餐備案｜依起床時間","Working Holiday 海雲台店（워킹홀리데이 해운대）","부산 해운대구 해운대해변로 277 다옴빌딩 5층。可列為海雲台早午餐備案，推薦法式可麗餅；只有起床時間合適、店家營業且順路時才去，標註「有空才去」。若起床較晚就直接吃午餐，不必特地安排；無論如何都要保留 16:15 前天空膠囊報到時間。<a href='https://map.naver.com/p/search/워킹홀리데이%20해운대' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Working+Holiday+Haeundae+Busan' target='_blank'>Google Maps ↗</a>","早午餐備案／有空才去"],
+  ["上午","自然島鹽麵包＋海雲台逛店","자연도소금빵｜부산 해운대구 달맞이길62번길 12-1（分店請核對）。買原味鹽麵包外帶；Miffy Store（미피 스토어）地址以地圖店家頁確認。","順路外帶"],
+  ["上午／午前","Who's Who MUMU 或 Ovone Café 擇一","후즈후무무：推薦巧克力麵包；오브원 카페：推薦水果蛋糕。兩間擇一，不需要都吃。","二選一"],
+  ["海雲台商圈路過才拍","PHOTO SIGNATURE 海雲台（포토시그니처 해운대）","부산 해운대구 구남로 24。安排在海雲台逛街時順路拍人生四格，不另為拍貼繞路。<a href='https://map.naver.com/p/search/포토시그니처%20해운대' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Photo+Signature+Haeundae+24+Gunam-ro' target='_blank'>Google Maps ↗</a>","(路過才拍)"],
+  ["16:15 前","尾浦站報到","해운대 블루라인파크 미포정거장｜부산 해운대구 달맞이길62번길 13。預留找入口、驗票與排隊時間。","固定預約"],
+  ["17:00","天空膠囊：尾浦 → 青沙浦","約 30 分鐘。下車後可看海岸平交道、逛青沙浦。","固定預約"],
+  ["視營業時間","青沙浦甜點／咖啡（選一）","Clamsand（클램샌드｜부산 해운대구 청사포로 120-1）買貝殼餅乾；Liberta（리베르타）想坐下看海再去。DIART（디아트커피 청사포）只考慮這一間分店，但營業時間可能與 17:00 膠囊衝突，需先核實，不列為必去。","有空再去"]
+ ],
+ maplinks:[["尾浦站 Naver Map","https://map.naver.com/p/search/%ED%95%B4%EC%9A%B4%EB%8C%80%20%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC%20%EB%AF%B8%ED%8F%AC%EC%A0%95%EA%B1%B0%EC%9E%A5"],["尾浦站 Google Maps","https://www.google.com/maps/search/?api=1&query=Mipo+Sky+Capsule+Busan"],["DIART Naver Map","https://map.naver.com/p/search/%EB%94%94%EC%95%84%ED%8A%B8%EC%BB%A4%ED%94%BC%20%EC%B2%AD%EC%82%AC%ED%8F%AC"],["DIART Google Maps","https://www.google.com/maps/search/?api=1&query=DIART+Coffee+Cheongsapo+Busan"]],
+ note:"Working Holiday 海雲台店只是早午餐備案，依起床時間、店家營業及當日路線決定；有空才去，晚起就直接吃午餐，不設固定用餐時間。16:15 前抵達尾浦站、17:00 天空膠囊是固定行程；不要因為排隊或坐太久而壓縮報到時間。晚餐依原計畫 Jinmi House 烤韓牛排骨；PHOTO SIGNATURE 路過才拍。DIART 不要等膠囊搭完才去，避免抵達時已打烊。"
+},
+3:{
+ color:"#9271C8",bg:"#EFE8F8",date:"10/23（五）",title:"機張・Luge・Outlet・海景",
+ subtitle:"今天主軸在東釜山，咖啡只選真正順路的一間。",
+ route:["CAFE YOON 輕早午餐","Skyline Luge","蔘雞湯","Outlet","CORALANI","晚餐"],
+ stops:[
+  ["09:00 早午餐（出發前確認）","CAFE YOON（카페 윤）","부산 기장군 기장해안로 34-16。作為機張海岸路一帶的咖啡／輕食停靠點；目前未確認完整早午餐菜單，建議到店看當日供應。若不想增加停留，就在住宿附近簡單吃完再出發，保住 Luge 與 Outlet 時間。<a href='https://map.naver.com/p/search/카페윤%20기장해안로' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Cafe+Yoon+Gijang+Busan' target='_blank'>Google Maps ↗</a>","早午餐／先確認營業"],
+  ["上午","Skyline Luge Busan","스카이라인 루지 부산｜부산 기장군 기장읍 기장해안로 205。使用 Pass 紫色 A 組前，核對當期規則。","主要行程"],
+  ["中午","百年土種蔘雞湯","백년토종삼계탕｜分店地址出發前核對。吃完再前往 Outlet，避免來回折返。","午餐"],
+  ["下午","樂天東釜山 Lotte Mall／Premium Outlet／樂天超市","롯데프리미엄아울렛 동부산점｜부산 기장군 기장해안로 147。這裡集合 Outlet、Mall 與 LOTTE MART，建議預留約 2–3 小時；詳細購物順序、品牌清單、超市位置及麵包甜點口袋名單統一放在下方「今日小提醒」，此處不重複列出。","主要行程／購物＋美食＋超市"],
+  ["下午茶","CORALANI 海景咖啡","코랄라니｜부산 기장군 기장해안로 32。當天唯一主要海景咖啡廳，適合坐下來看海。","海景停留"],
+  ["晚餐","Gogyeol 稻草燒烤","고결｜請以訂位店家韓文名確認分店及地址。","晚餐"],
+  ["有空才去","MOMOS Coffee","모모스커피｜只在當天路線剛好經過的分店外帶；不為咖啡繞路。","(有空才去)／順路外帶"]
+ ],
+ maplinks:[["Luge Naver Map","https://map.naver.com/p/search/%EC%8A%A4%EC%B9%B4%EC%9D%B4%EB%9D%BC%EC%9D%B8%20%EB%A3%A8%EC%A7%80%20%EB%B6%80%EC%82%B0"],["Luge Google Maps","https://www.google.com/maps/search/?api=1&query=Skyline+Luge+Busan"],["樂天 Outlet Naver Map","https://map.naver.com/p/search/%EB%A1%AF%EB%8D%B0%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%EC%95%84%EC%9A%B8%EB%A0%9B%20%EB%8F%99%EB%B6%80%EC%82%B0%EC%A0%90"],["樂天 Outlet Google Maps","https://www.google.com/maps/search/?api=1&query=Lotte+Premium+Outlets+Dongbusan"],["樂天超市 Naver Map","https://map.naver.com/p/search/LOTTE%20MART%20%EB%8F%99%EB%B6%80%EC%82%B0"],["Longchamp／Ralph Lauren 樓層查詢","https://kr.styletter.com/places/lotte-outlet-dongbusan/"],["CORALANI Naver Map","https://map.naver.com/p/search/%EC%BD%94%EB%9E%84%EB%9D%BC%EB%8B%88"],["CORALANI Google Maps","https://www.google.com/maps/search/?api=1&query=CORALANI+Busan"]],
+ note:"早上若選 CAFE YOON，請先確認當日營業與供餐；若時間不合，直接簡單吃完前往 Luge，不要為早午餐繞路。樂天購物順序：先逛 Longchamp、POLO RALPH LAUREN 女生／小孩款與 MARITHÉ FRANÇOIS GIRBAUD 成人／童裝，再買路過的小點心，離開前才去 LOTTE MART。超市約在 Gate 1 斜對角，依現場指標確認。MARITHÉ 官方門市資訊列 1F；品牌櫃位可能調整，進場先看樓層圖。麵包甜點口袋名單：Gentz Bakery、In the Mass、Auntie Anne’s、Street Churros；店鋪是否仍在館內及實際樓層請以當日導覽確認，路過才買、不為單一店家繞路。購物時間設停損點，保留 CORALANI 看海時間。雨天 KidZania 僅替代 Luge／戶外活動，不要同天硬塞 KidZania、Luge、Outlet 與 CORALANI 全部。MOMOS Coffee 不為了外帶繞路。"
+},
+4:{
+ color:"#57936C",bg:"#E8F1E6",date:"10/24（六）",title:"廣安里・Centum City・無人機秀",
+ subtitle:"上午海邊、下午百貨，晚上回廣安里；咖啡和小店插在路過的空檔。",
+ route:["早午餐備案：All Sunday Bagel／Working Holiday","廣安里海灘","豬肉湯飯","新世界百貨 Centum City 店","遊艇集合","無人機秀"],
+ stops:[
+  ["早午餐備案｜依起床時間","All Sunday Bagel（올선데이베이글）或 Working Holiday 廣安里店（워킹홀리데이）","All Sunday Bagel 地址 부산 수영구 광안로61번길 28，推薦藍莓貝果、紅豆奶油貝果；另一選擇是 Working Holiday 廣安里店，可考慮法式可麗餅。依起床時間、營業狀況及當天想吃的品項擇一；有空才去，不設固定用餐時間。若晚起就直接吃午餐／豬肉湯飯。<a href='https://map.naver.com/p/search/올선데이베이글%20광안리' target='_blank'>All Sunday Bagel Naver Map ↗</a> ｜ <a href='https://map.naver.com/p/search/워킹홀리데이%20광안리' target='_blank'>Working Holiday Naver Map ↗</a>","早午餐備案／二選一／有空才去"],
+  ["10:00","廣安里海灘玩沙／旅拍","광안리해수욕장｜부산 수영구 광안해변로 일대。若經過 Blue Bottle 民樂店（블루보틀 부산 민락），可外帶；不順路就跳過。","主要行程"],
+  ["午餐","水邊最高豬肉湯飯","수변최고돼지국밥｜老公原訂 Centum 分店，請出發前確認分店地址；不要導航到民樂本店而改變路線。","先確認分店"],
+  ["下午","新世界百貨 Centum City 店","신세계백화점 센텀시티점｜부산 해운대구 센텀남대로 35。確認為新世界百貨 Centum City 分店，不是隔壁的 Lotte Department Store，也不是只標示 Centum City Mall 的獨立商場；Cafe Layered（카페 레이어드）可順路外帶甜點。","購物"],
+  ["回廣安里途中","小店順路採買","Presenthing（프레젠씽 바이 아도르）想買幸運烏龜；Room for One（룸포원）、Catch 花店（캐치 플라워）只在附近有空才去。","順路口袋"],
+  ["18:30／19:00","遊艇集合與無人機秀","依訂單前往廣安里海洋休閒運動中心；活動可能因天候或技術因素調整。","固定安排"],
+  ["晚餐後／有空才拍","廣安里拍貼｜Haru Film（하루필름 광안리점）","부산 수영구 광안로61번길 60。若看完無人機秀後還有精神、店家營業且順路，可拍四格留念；不影響回飯店休息。<a href='https://map.naver.com/p/search/하루필름%20광안리점' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Haru+Film+Gwangalli+Busan' target='_blank'>Google Maps ↗</a>","(有空才拍)"],
+  ["晚餐","Puradak Chicken 外帶回飯店","푸라닭 치킨｜民樂附近分店請用地圖確認。推薦黑蒜、起司玉米口味。","外帶回飯店"],
+  ["路過才買","Tenpercent／Franklin Coffee","只在本來就會經過的分店外帶；不為咖啡特別改變路線。","順路外帶"]
+ ],
+ maplinks:[["All Sunday Bagel Naver Map","https://map.naver.com/p/search/%EC%98%AC%EC%84%A0%EB%8D%B0%EC%9D%B4%EB%B2%A0%EC%9D%B4%EA%B8%80%20%EA%B4%91%EC%95%88%EB%A6%AC"],["All Sunday Bagel Google Maps","https://www.google.com/maps/search/?api=1&query=All+Sunday+Bagel+Busan"],["廣安里 Naver Map","https://map.naver.com/p/search/%EA%B4%91%EC%95%88%EB%A6%AC%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5"],["廣安里 Google Maps","https://www.google.com/maps/search/?api=1&query=Gwangalli+Beach+Busan"],["新世界 Naver Map","https://map.naver.com/p/search/%EC%8B%A0%EC%84%B8%EA%B3%84%20%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0"],["新世界 Google Maps","https://www.google.com/maps/search/?api=1&query=Shinsegae+Centum+City+Busan"]],
+ note:"Day 4 早午餐是備案，不設固定時間：依起床時間在 All Sunday Bagel 與 Working Holiday 廣安里店擇一；推薦前者的藍莓貝果、紅豆奶油貝果，後者可考慮法式可麗餅。若晚起就直接吃午餐／水邊最高豬肉湯飯，不必為早午餐繞路。新世界百貨分店確認為 신세계백화점 센텀시티점，地址 부산광역시 해운대구 센텀남대로 35（우동）；不要導航到樂天百貨。百貨內 Horizon（호라이즌）2F 可作替代選項，約 10:30 才開始營業。Tenpercent／Franklin Coffee 只在原路線經過時外帶。Haru Film 放在廣安里晚間區塊，有空才拍。"
+},
+5:{
+ color:"#D88948",bg:"#F8EADD",date:"10/25（日）",title:"Arte Museum・影島・松島・南浦洞",
+ subtitle:"Arte Museum 必去；影島咖啡只路過外帶，南浦洞購物依體力調整。",
+ route:["Lisboa 早午餐（可略過）","Arte Museum","影島路過外帶","松島纜車","BIFF 廣場","南浦洞"],
+ stops:[
+  ["09:00 早午餐（依開店時間）","Lisboa Cafeteria Busan（리스보아 카페테리아）","부산 영도구 절영로 198。可在前往 Arte Museum 前先吃簡單早午餐／咖啡；如果開店時間或交通不配合，直接前往 Arte，改在館內或離館後用餐，不為咖啡店繞路。<a href='https://map.naver.com/p/search/Lisboa%20Cafeteria%20Busan%20영도' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Lisboa+Cafeteria+Busan+Yeongdo' target='_blank'>Google Maps ↗</a>","早午餐／先確認營業"],
+  ["上午","Arte Museum Busan（必去）","아르떼뮤지엄 부산｜부산 영도구 해양로247번길 29。建議開館後入場，預留約 1.5–2 小時。","必去"],
+  ["離館後","MOMOS Coffee 影島店（路過才買）","모모스커피 영도 로스터리 & 커피바｜부산 영도구 봉래나루로 160。只外帶，不特別坐下來喝；若不順路直接跳過。","順路外帶"],
+  ["可選","白淺灘文化村","흰여울문화마을｜影島海岸散步；若時間不夠，優先刪除，不影響 Arte 與松島。","彈性"],
+  ["下午","松島海上纜車＋天空步道","부산 송도해상케이블카｜부산 서구 송도해변로 171。使用 Pass 藍色 B 組前核對當期規則。","主要行程"],
+  ["南浦洞午餐","豚笑豬排店（돈카츠／豚笑，店名與分店待核實）","安排在松島後、南浦洞購物前作為午餐。先確認你原本收藏的正確店名與分店；不要直接依未核實地址導航。<a href='https://map.naver.com/p/search/豚笑%20부산' target='_blank'>Naver Map 搜尋豚笑 ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=豚笑+Busan+tonkatsu' target='_blank'>Google Maps 搜尋 ↗</a>","午餐／先確認分店"],
+  ["下午／傍晚","南浦洞與 BIFF 廣場","BIFF 광장｜找指定黃色招牌糖餅攤；再逛光復路、地下街、樂天光復店。EPT（이피티 광복점）有空再逛。","購物"],
+  ["南浦洞逛街時","南浦洞拍貼｜Photoism Box（포토이즘 박스 남포동점）","부산 중구 남포길 14-1。與 BIFF 廣場、光復路購物放在同一段；路過再拍。<a href='https://map.naver.com/p/search/포토이즘%20박스%20남포동점' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Photoism+Box+Nampo-dong+Busan' target='_blank'>Google Maps ↗</a>","(路過才拍)"],
+  ["晚餐","Eonyang 韓牛","언양불고기｜依訂位確認正確店名、分店與時間。南浦洞太晚就縮短購物，不要延誤訂位。","晚餐"],
+  ["有空才去","Tenpercent Coffee／Huinnyeoul 海景咖啡","Tenpercent 僅限松島或南浦路線上順路的分店外帶；Huinnyeoul 海景咖啡區只當白淺灘散步的替代停留，不再加第二間咖啡店。","(有空才去)"]
+ ],
+ maplinks:[["Arte Naver Map","https://map.naver.com/p/search/%EC%95%84%EB%A5%B4%EB%96%BC%EB%AE%A4%EC%A7%80%EC%97%84%20%EB%B6%80%EC%82%B0"],["Arte Google Maps","https://www.google.com/maps/search/?api=1&query=Arte+Museum+Busan"],["松島纜車 Naver Map","https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%A1%EB%8F%84%ED%95%B4%EC%83%81%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4"],["松島纜車 Google Maps","https://www.google.com/maps/search/?api=1&query=Songdo+Marine+Cable+Car+Busan"]],
+ note:"Day 5 早午餐可選 Lisboa Cafeteria，但要先確認開店時間與實際供餐；若會耽誤 Arte Museum 開館後入場，直接略過，改在景點附近用餐。Tenpercent Coffee 松島／南浦分店只有地圖確認順路才外帶；Huinnyeoul 海景咖啡區若安排，視為白淺灘散步的替代停留，不再加第二間咖啡店。南浦洞 Photoism Box 已整合在 BIFF／光復路購物段。"
+},
+6:{
+ color:"#C46F91",bg:"#F7E6ED",date:"10/26（一）",title:"回程日・看航班決定",
+ subtitle:"未確認回程時間前，不先把西面行程當成必去。",
+ route:["退房","晚班機才安排 HASH TABLE 早午餐","西面／田浦（可選）","金海機場"],
+ stops:[
+  ["若晚班機｜早午餐","HASH TABLE（해시테이블）西面店","부산 부산진구 서전로 74。可安排西面早午餐，建議先確認當日營業與候位；若航班較早、需寄放行李或前往機場時間緊，直接跳過西面行程。<a href='https://map.naver.com/p/search/HASH%20TABLE%20서면' target='_blank'>Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=HASH+TABLE+Seomyeon+Busan' target='_blank'>Google Maps ↗</a>","僅晚班機／先確認營業"],
+  ["若晚班機","西面／田浦彈性購物","전포카페거리｜田浦咖啡街小店；螞蟻家（개미집 서면점）先確認分店。","有時間才去"],
+  ["西面／田浦路過才拍","Photoism Box／Haru Film（西面分店擇一）","Photoism Box：부산 부산진구 중앙대로692번길 26；Haru Film：부산 부산진구 중앙대로702번길 19。只有晚班機、時間充裕且順路才拍。<a href='https://map.naver.com/p/search/포토이즘%20박스%20부산서면점' target='_blank'>Photoism Naver Map ↗</a> ｜ <a href='https://www.google.com/maps/search/?api=1&query=Haru+Film+Busan+Seomyeon' target='_blank'>Haru Film Google Maps ↗</a>","(有空才拍)"],
+  ["路過才買","Tenpercent／Franklin Coffee 外帶","텐퍼센트커피／프랭클린커피｜先確認當天營業的分店；不要為一杯咖啡跨區。","順路外帶"],
+  ["若早班機","直接前往機場","先確認退房時間、行李與交通；不安排額外景點。","回程優先"],
+  ["有空才去","拍貼／田浦小店／螞蟻家","僅限晚班機、行李已安排好且時間充裕時；螞蟻家（개미집 서면점）先確認分店，不影響前往機場。","(有空才去)"]
+ ],
+ maplinks:[["西面 Naver Map","https://map.naver.com/p/search/%EC%84%9C%EB%A9%B4%20%EB%B6%80%EC%82%B0"],["西面 Google Maps","https://www.google.com/maps/search/?api=1&query=Seomyeon+Busan"],["金海機場 Google Maps","https://www.google.com/maps/search/?api=1&query=Gimhae+International+Airport"]],
+ note:"Day 6 只有晚班機且時間充裕時才安排 HASH TABLE 早午餐與西面／田浦；若早班機或需要提早去機場，直接略過，不安排早午餐店。DIART 田浦店不放進 10/26；本次只考慮青沙浦店，但營業時間可能與 17:00 天空膠囊衝突，出發前先確認。西面／田浦拍貼僅限晚班機且時間充裕時，不能影響前往機場。"
+}
+};
+function render(day){
+ const d=days[day]; document.documentElement.style.setProperty('--day',d.color); document.documentElement.style.setProperty('--daybg',d.bg);
+ const stopHtml=d.stops.map(s=>`<div class="stop"><div class="time">${s[0]}</div><div class="stopbody"><h3>${s[1]}</h3><p>${s[2]}</p><span class="tag ${s[3].includes('固定')||s[3].includes('必去')?'fixed':s[3].includes('外帶')?'takeout':s[3].includes('可選')||s[3].includes('彈性')||s[3].includes('有時間')?'optional':''}">${s[3]}</span></div></div>`).join('');
+ const routeHtml=d.route.map((r,i)=>`<div class="map-point"><span class="map-star">★</span><span>${r}</span></div>${i<d.route.length-1?'<span class="arrow">›</span>':''}`).join('');
+ const links=d.maplinks.map(l=>`<a class="maplink" href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join('');
+ document.getElementById('content').innerHTML=`
+ <div class="layout" style="--day:${d.color};--daybg:${d.bg}">
+  <section class="panel">
+   <div class="day-head"><div class="day-badge">★</div><div><div class="date">${d.date}　·　DAY ${day}</div><h2>${d.title}</h2><p>${d.subtitle}</p></div></div>
+   <div class="route"><strong>今日路線</strong>　${d.route.map((x,i)=>`${i?'<span class="arrow">→</span>':''}<span>${x}</span>`).join(' ')}</div>
+   <div class="timeline">${stopHtml}</div>
+   <div class="side-section"><h3>✎ 今日小提醒</h3><div class="mini">${d.note}</div></div>
+  </section>
+  <aside>
+   <section class="panel">
+    <div class="map-title"><h3>今日星號地圖</h3><small>示意路線・非比例地圖</small></div>
+    <div class="map-canvas"><div class="map-route">${routeHtml}</div><p class="map-note">★ 本日星號使用專屬顏色；實際交通請點開地圖導航。</p></div>
+    <div class="links">${links}</div>
+   </section>
+   <section class="panel side-section">
+    <h3>☕ 今天順路的選擇</h3>
+    <div class="mini"><strong>原則</strong><br>本來就會經過才去；不順路、時間不合或孩子累了，就直接略過。</div>
+    <div class="mini"><strong>導航前確認</strong><br>韓文店名、分店、營業時間；標示待核實者不要只憑中文名稱出發。</div>
+    <div class="mini"><strong>手帳分類</strong><br><span class="tag">主要行程</span><span class="tag takeout">順路外帶</span><span class="tag optional">有空再去</span><span class="tag fixed">固定預約</span></div>
+   </section>
+  </aside>
+ </div>`;
+}
+document.getElementById('tabs').addEventListener('click',e=>{
+ const b=e.target.closest('button[data-day]'); if(!b)return;
+ document.querySelectorAll('.day-tab').forEach(x=>x.classList.toggle('active',x===b)); render(Number(b.dataset.day));
+});
+render(1);
+</script>
+</body>
+</html>
